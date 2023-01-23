@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework.routers import SimpleRouter
+
+from reviews.views import MetricsViewSet
+from reviews.views import ClassifyReview
+
+router = SimpleRouter()
+
+router.register(r'metrics', MetricsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/get_review_metrics/', ClassifyReview.as_view())
 ]
+
+urlpatterns += router.urls
